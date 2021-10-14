@@ -41,9 +41,37 @@ class Airplane {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-class Person {
+class Person{
+  constructor(name, age, stomach) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+  }
   
+  eat(food){
+    if(this.stomach.length < 10){
+      this.stomach.push(food);
+    } 
+  }
+  
+  poop(){
+    this.stomach = [];
+  }
+  
+  toString(){
+    return `${this.name}, ${this.age}`;
+  }
 }
+
+const amy = new Person('Amy', 35, 0); 
+
+
+amy.eat('french fries');
+console.log(amy.stomach);
+amy.poop();
+console.log(amy.stomach);
+
+
 
 /*
   TASK 2
@@ -60,8 +88,48 @@ class Person {
 */
 
 class Car {
+  constructor(model, milesPerGallon){
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+  fill(gallons){
+    return this.tank = this.tank + gallons;
+  }
+  drive(miles){
+    if (this.tank > miles/this.milesPerGallon) {
+      this.odometer = this.odometer + miles;
+      this.tank = this.tank - (miles/this.milesPerGallon);
+  } else if (this.tank <= miles/this.milesPerGallon){
+    this.odometer = this.odometer + Math.abs(this.tank - miles/this.milesPerGallon);
+    console.log(`I ran out of fuel at ${this.odometer} miles!`);
+    return this.tank = 0;
+  }
   
 }
+}
+
+const carOne = new Car('Gold Duster', 23);
+const carTwo = new Car('Avolone', 35);
+const carThree = new Car('Civic', 36);
+
+
+carOne.fill(1);
+carOne.drive(20);
+console.log('New odometer reading:', carOne.odometer);
+console.log('New tank reading:', carOne.tank);
+carOne.drive(20);
+
+// console.log('Car drives x miles:', carOne.drive(20));
+// console.log('New tank reading:', carOne.tank);
+// console.log('New odometer reading:', carOne.odometer);
+
+// console.log('Miles per gallon:', carOne.milesPerGallon);
+// console.log('Gallons in tank:', carOne.tank);
+// console.log('Odometer count:', carOne.odometer);
+
+
 
 /*
   TASK 3
