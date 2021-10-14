@@ -98,32 +98,29 @@ class Car {
     return this.tank = this.tank + gallons;
   }
   drive(miles){
-    if (this.tank > miles/this.milesPerGallon) {
+    if (this.tank >= miles/this.milesPerGallon) {
       this.odometer = this.odometer + miles;
       this.tank = this.tank - (miles/this.milesPerGallon);
-  } else if (this.tank <= miles/this.milesPerGallon){
-    this.odometer = this.odometer + Math.abs(this.tank - miles/this.milesPerGallon);
-    console.log(`I ran out of fuel at ${this.odometer} miles!`);
-    return this.tank = 0;
-  }
+  } else if (this.tank < miles/this.milesPerGallon){
+    this.odometer = this.odometer + this.tank * this.milesPerGallon;
+    this.tank = 0;
+    return `I ran out of fuel at ${this.odometer} miles!`;
+    }
   
 }
 }
 
-const carOne = new Car('Gold Duster', 23);
+const carOne = new Car('Gold Duster', 20);
 const carTwo = new Car('Avolone', 35);
 const carThree = new Car('Civic', 36);
 
 
-carOne.fill(1);
-carOne.drive(20);
-console.log('New odometer reading:', carOne.odometer);
-console.log('New tank reading:', carOne.tank);
-carOne.drive(20);
+carOne.fill(10);
+carOne.drive(201);
 
-// console.log('Car drives x miles:', carOne.drive(20));
-// console.log('New tank reading:', carOne.tank);
-// console.log('New odometer reading:', carOne.odometer);
+
+console.log('New tank reading:', carOne.tank);
+console.log('New odometer reading:', carOne.odometer);
 
 // console.log('Miles per gallon:', carOne.milesPerGallon);
 // console.log('Gallons in tank:', carOne.tank);
@@ -144,8 +141,19 @@ carOne.drive(20);
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-  
+  constructor(name, age, location){
+    this.name = name;
+    this.age = age;
+    this.location = location;
+    
+  }
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}`;
+  }
 }
+
+const leo = new Lambdasian('Leo', 32, 'Florida');
+console.log(leo.speak());
 
 /*
   TASK 4
