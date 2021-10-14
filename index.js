@@ -66,10 +66,10 @@ class Person{
 const amy = new Person('Amy', 35, 0); 
 
 
-amy.eat('french fries');
-console.log(amy.stomach);
-amy.poop();
-console.log(amy.stomach);
+// amy.eat('french fries');
+// console.log(amy.stomach);
+// amy.poop();
+// console.log(amy.stomach);
 
 
 
@@ -115,12 +115,12 @@ const carTwo = new Car('Avolone', 35);
 const carThree = new Car('Civic', 36);
 
 
-carOne.fill(10);
-carOne.drive(201);
+// carOne.fill(10);
+// carOne.drive(201);
 
 
-console.log('New tank reading:', carOne.tank);
-console.log('New odometer reading:', carOne.odometer);
+// console.log('New tank reading:', carOne.tank);
+// console.log('New odometer reading:', carOne.odometer);
 
 // console.log('Miles per gallon:', carOne.milesPerGallon);
 // console.log('Gallons in tank:', carOne.tank);
@@ -141,10 +141,10 @@ console.log('New odometer reading:', carOne.odometer);
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-  constructor(name, age, location){
-    this.name = name;
-    this.age = age;
-    this.location = location;
+  constructor(properties){
+    this.name = properties.name;
+    this.age = properties.age;
+    this.location = properties.location;
     
   }
   speak(){
@@ -152,8 +152,16 @@ class Lambdasian {
   }
 }
 
-const leo = new Lambdasian('Leo', 32, 'Florida');
-console.log(leo.speak());
+const leo = new Lambdasian({
+  name: 'Leo',
+  age: 32,
+  location: 'Florida'
+});
+
+
+// console.log(leo.speak());
+// console.log(leo.name);
+
 
 /*
   TASK 4
@@ -169,9 +177,36 @@ console.log(leo.speak());
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
-
+class Instructor extends Lambdasian{
+  constructor(atters){
+    super(atters);
+    this.specialty = atters.specialty;
+    this.favLanguage = atters.favLanguage;
+    this.catchPhrase = atters.catchPhrase;
+  }
+  demo(subject){
+    return `Today we are learning about ${subject}`;
+  }
+  grade(student, subject){
+    return `${student} receives a perfect score on ${subject}`;
+  }
 }
+
+const beth = new Instructor({
+  name: 'Beth',
+  age: 42,
+  location: 'Canada',
+  specialty: 'JavaScript',
+  favLanguage: 'JavaScript',
+  catchPhrase: 'See ya later alligator'
+});
+
+// console.log(beth.speak());
+// console.log(beth.demo('CSS'));
+// console.log(beth.grade('Sunny', 'HTML'));
+
+
+
 /*
   TASK 5
     - Write a Student class extending Lambdasian.
@@ -187,9 +222,51 @@ class Instructor {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
-   
-}
+class Student extends Lambdasian{
+   constructor(items){
+    super(items);
+    this.previousBackground = items.previousBackground;
+    this.className = items.className;
+    this.favSubject = items.favSubject;
+   }
+
+   listSubjects(){
+     const list = `Loving ${this.favSubject.sub1}, ${this.favSubject.sub2}, ${this.favSubject.sub3}!`;
+     return list;
+      
+    }
+
+    PRAssignment(subject){
+      return `${this.name} has submitted a PR for ${subject}`;
+    }
+
+    sprintChallenge(subject){
+      return `${this.name} has begun sprint challenge on ${subject}`;
+    }
+  }
+
+
+const sam = new Student({
+  name: 'Sam',
+  age: 24,
+  location: 'US',
+  previousBackground: 'Teacher',
+  className: 'CSS101',
+  favSubject: {
+    sub1: 'HTML',
+    sub2: 'CSS',
+    sub3: 'JS'
+  }
+});
+
+
+console.log(sam.name);
+console.log(sam.speak());
+console.log(sam.listSubjects());
+console.log(sam.className);
+
+
+
 
 /*
   TASK 6
