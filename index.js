@@ -289,12 +289,16 @@ class ProjectManager extends Instructor{
    }
   
    debugsCode(object){
-    return `${this.name} debugs ${object.studentName}'s code on ${object.subject}`
+    return `${this.name} debugs ${object.name}'s code on ${object.subject}`
+   }
+
+   grade(object){
+     return `${object.name} receives a perfect score on ${object.course}`;
    }
 }
 
 const rayanne = new ProjectManager({
-  name: 'Beth',
+  name: 'RayAnne',
   age: 42,
   location: 'Canada',
   specialty: 'JavaScript',
@@ -306,8 +310,8 @@ const rayanne = new ProjectManager({
 
 console.log(rayanne.name);
 console.log(rayanne.gradClassName);
-console.log(rayanne.debugsCode({studentName: 'Chris', subject: 'Math'}));
-
+console.log(rayanne.debugsCode({name: 'Fred', subject: 'HTML'}));
+console.log(rayanne.grade({name: 'Luke', course: 'redux'}));
 
 /*
   STRETCH PROBLEM (no tests!)
