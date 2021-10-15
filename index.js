@@ -231,9 +231,7 @@ class Student extends Lambdasian{
    }
 
    listSubjects(){
-     const list = `Loving ${this.favSubject.sub1}, ${this.favSubject.sub2}, ${this.favSubject.sub3}!`;
-     return list;
-      
+     return `Loving ${sam.favSubject.sub1}, ${sam.favSubject.sub2}, ${sam.favSubject.sub3}!`;
     }
 
     PRAssignment(subject){
@@ -259,13 +257,11 @@ const sam = new Student({
   }
 });
 
-
-console.log(sam.name);
-console.log(sam.speak());
-console.log(sam.listSubjects());
-console.log(sam.className);
-
-
+console.log(sam.favSubject.sub1);
+// console.log(sam.name);
+// console.log(sam.speak());
+console.log('task complete:', sam.listSubjects(sam));
+// console.log(sam.className);
 
 
 /*
@@ -281,9 +277,38 @@ console.log(sam.className);
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-   
+class ProjectManager extends Instructor{
+   constructor(elements){
+     super(elements);
+     this.gradClassName = elements.gradClassName;
+     this.favInstructor = elements.favInstructor;
+   }
+
+   standUp(channel){
+    return `${this.name} announces to ${channel}, @channel standy times!`;
+   }
+  
+   debugsCode(object){
+    return `${this.name} debugs ${object.studentName}'s code on ${object.subject}`
+   }
 }
+
+const rayanne = new ProjectManager({
+  name: 'Beth',
+  age: 42,
+  location: 'Canada',
+  specialty: 'JavaScript',
+  favLanguage: 'JavaScript',
+  catchPhrase: 'See ya later alligator',
+  gradClassName: 'CS1',
+  favInstructor: 'Seth'
+});
+
+console.log(rayanne.name);
+console.log(rayanne.gradClassName);
+console.log(rayanne.debugsCode({studentName: 'Chris', subject: 'Math'}));
+
+
 /*
   STRETCH PROBLEM (no tests!)
     - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
